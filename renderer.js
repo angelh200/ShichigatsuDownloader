@@ -6,7 +6,8 @@
 // process.
 const {dialog} = require('electron').remote;
 const fs = require('fs');
-console.log(document);
+
+const btn = document.getElementById('button');
 
 //Muestra el dialogo para seleccionar la carpeta de guardado de las imagenes.
 function showSaveDialog() {
