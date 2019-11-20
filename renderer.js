@@ -23,6 +23,16 @@ function showSaveDialog() {
     }
     // TODO: Implementar funcion saveImages que descarga las imagenes
     // y las guarda en el directorio especificado.
-    //saveImages(res.filePaths[0]);
+    //saveImages(res.filePaths[0], link, source);
   });
 }
+
+//Devuelve un array con links de las imagenes
+function getMangadexImages(mainLink) {
+}
+
+const testLink = 'https://s4.mangadex.org/data/5af57d4ce151796a79d6cc5b65cae56d/C1.png';
+console.log(getMangadexImages(testLink));
+
+//Add Save function to the button
+btn.onclick = showSaveDialog;
