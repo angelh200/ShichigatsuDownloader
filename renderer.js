@@ -10,10 +10,10 @@ const fs = require('fs');
 const btn = document.getElementById('button');
 
 //Muestra el dialogo para seleccionar la carpeta de guardado de las imagenes.
-function showSaveDialog() {
+function showSaveDialog(link, pages, source) {
   let directoryPath;
   dialog.showOpenDialog({
-    title: 'seleccionar carpeta',
+    title: 'Selecciona la carpeta destino',
     defaultPath: '/home/angel/Desktop/random',
     buttonLabel: 'Seleccionar carpeta',
     properties: ['openDirectory'],
@@ -21,18 +21,81 @@ function showSaveDialog() {
     if (res.canceled || res.filePaths[0] === undefined) {
       return;
     }
+    console.log(res.filePaths[0]);
     // TODO: Implementar funcion saveImages que descarga las imagenes
     // y las guarda en el directorio especificado.
     //saveImages(res.filePaths[0], link, source);
+    saveImages(res.filePaths[0], link, pages, source);
+    document.getElementById('link').value = '';
+    document.getElementById('pages').value = '';
   });
 }
 
-//Devuelve un array con links de las imagenes
-function getMangadexImages(mainLink) {
+function saveImages(directory, link, pages, source) {
+  switch (source) {
+    case 'mangadex':
+      downloadMangadexImages(link, pages, directory + '/');
+      break;
+  }
 }
 
-const testLink = 'https://s4.mangadex.org/data/5af57d4ce151796a79d6cc5b65cae56d/C1.png';
-console.log(getMangadexImages(testLink));
+//Devuelve un array con links de las imagenes
+async function downloadMangadexImages(mainLink, pages, filePath) {
+  
+  const slashIndex = mainLink.lastIndexOf('/');
+
+  let counter = mainLink[slashIndex + 2];
+
+  const frontLink = mainLink.slice(0, slashIndex + 2);
+  const endLink = mainLink.slice(slashIndex + 3);
+
+  let link;
+
+  //Descarga secuencialmente los links
+  for(let i = counter; i <= pages; i++) {
+      link = frontLink + i + endLink;
+      await downloadImage(link, filePath + i);
+      console.log(i);
+  }
+
+}
+
+//Descarga la imagen a partir del link y o ubica en el directorio especificado
+async function downloadImage(link, filePath) {
+  try {
+    const response = await fetch(link);
+
+    if (response.ok) {
+      const myImg = await response.blob();
+      console.log(myImg.type);
+      const imgBuffer = Buffer.from(await myImg.arrayBuffer());
+  
+      const extension = myImg.type.slice(myImg.type.indexOf('/') + 1);
+      
+      fs.writeFile(filePath + '.' + extension, imgBuffer, (err) => {
+        if (err) {
+          throw err;
+        }
+        console.log("The image has been saved sucesfully");
+      })
+    } else {
+      return;
+    }
+  } catch(e) {
+    console.log('Hubo un error: ' + e);
+  }
+
+}
+//downloadMangadexImages(testLink, 12, './images/');
+
+function handleDownload() {
+  let link = document.getElementById('link').value;
+  let pages = document.getElementById('pages').value;
+  let source = document.getElementById('fuente').value;
+
+  showSaveDialog(link, pages, source);
+}
 
 //Add Save function to the button
-btn.onclick = showSaveDialog;
+btn.onclick = handleDownload;
+//btn.onclick = showSaveDialog();

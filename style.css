@@ -46,12 +46,65 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
 /* Personal CSS */
+body {
+	background-image: url('./images/EIdS7qHXUAIToSE.jpeg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: white;
+	background-size: contain;
+	height: 100vh;
+}
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-	flex-direction: column;
+	background-color: rgba(0, 0, 0, 0.3);
+	color: #46E892;
+	height: 100vh;
 	text-align: center;
+	font-family: 'Calistoga', cursive;
+	padding: 20px;
+	text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+
+h1 {
+	font-size: 2.2rem;
+	margin: 50px auto;
+	display: inline-block;
+}
+
+label {
+	text-align: left;
+	font-size: 1.3rem;
+	margin: 20px;
+}
+
+input {
+	margin: 20px;
+	font-weight: bold;
+	padding: 5px;
+	font-size: 0.8rem;
+	color: black;
+}
+
+button, select {
+	margin: 10px;
+}
+#logo {
+	width: 100px;
+	height: auto;
+	display: inline-block;
+}
+
+button, select {
+	border: none;
+	cursor: pointer;
+	padding: 10px;
+	font-family: 'Calistoga';
+	font-size: 0.9rem;
+	color: black;
+	background-color: #46E892;
+	box-shadow: 1px 1px 1px #000;
+}
+
+select {
+	padding: 5px;
 }

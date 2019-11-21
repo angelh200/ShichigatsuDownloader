@@ -3,21 +3,21 @@
   <head>
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <link href="https://fonts.googleapis.com/css?family=Calistoga&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Shichigatsu no Yume || Downloader</title>
   </head>
   <body>
     <div class="container">
       <h1>Shichigatsu no Yume Fansub</h1>
-      <div class="logo">
-        <img src="#" alt="Logo de Shichigatsu">
-      </div>
       <form action="#">
         <label for="link">Salsa: </label>
         <br>
         <input type="text" id="link" name="link">
+        <br>
+        <label for="pages">Numero de paginas:</label>
+        <br>
+        <input type="number" id="pages">
         <br>
         <label for="fuente">Pagina de origen: </label>
         <br>
@@ -26,10 +26,11 @@
           <option value="mangakakalot">Mangakakalot</option>
         </select>
         <br>
-        <button type="submit" id="button">Descargar</button>
+        <button type="button" id="button">Descargar</button>
       </form>
     </div>
-    
+
+
     <script src="./renderer.js"></script>
   </body>
 </html>
